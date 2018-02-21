@@ -1,15 +1,28 @@
 {
   "name": "fun",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Renan Mariano <renanbym@gmail.com>",
+  "homepage": "https://github.com/renanbym/fun#readme",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "ionic:serve": "ionic-app-scripts serve",
+    "api:start": "./node_modules/mocha/bin/mocha --reporter spec --timeout 7000 && NODE_ENV=production nodemon api/app.js",
+    "api:dev": "NODE_ENV=development nodemon api/app.js",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renanbym/fun.git"
+  },
+  "engines": {
+    "node": "6.10.2"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/renanbym/fun/issues"
   },
   "dependencies": {
     "@angular/common": "5.0.3",
@@ -35,7 +48,11 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.8",
-    "typescript": "2.4.2"
+    "typescript": "2.4.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.5.3",
+    "nodemon": "^1.12.1"
   },
   "description": "An Ionic project",
   "cordova": {
