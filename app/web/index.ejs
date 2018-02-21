@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html ng-app="RoutEasy">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Challenge para desenvolvedor Full Stack</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+  integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+     integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+     crossorigin=""></script>
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" href="/public/css/style.css" />
+
+</head>
+
+<body ng-cloak  ng-controller="AppCtrl as app">
+
+  <div class="container-fluid">
+    <div class="row justify-content-center justify-content-md-center justify-content-lg-center">
+      <div class="col-4 content--form " ng-controller="FormCtrl as form">
+
+        <form  name="formDelivery" ng-submit="form.submit()" >
+
+          <fieldset>
+            <div class="form-group">
+              <input  class="form-control" type="text" placeholder="Nome" ng-model="form.value.name" required>
+            </div>
+
+            <div class="form-group">
+              <input class="form-control" type="text" placeholder="Peso da Entrega: 0.00" format="number"  ng-model="form.value.weight" awnum num-sep="." num-thousand-sep="," num-append=" kg" num-int="6" num-fract="3" num-thousand="true" num-fixed="true" required>
+            </div>
+
+            <div class="form-group">
+              <input class="form-control" type="text" placeholder="Endereço do cliente" ng-model="form.value.address" required googleplace >
+            </div>
+
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col">
+                  <input  class="form-control" type="text"  ng-model="form.value.longitude" placeholder="longitude" readonly>
+                </div>
+                <div class="col">
+                  <input  class="form-control" type="text"   ng-model="form.value.latitude" placeholder="latitude" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button class="col btn btn-info" type="submit"   >Cadastrar cliente</button>
+            </div>
+
+          </fieldset>
+        </form>
+
+        <button class="col btn btn-danger" ng-click="form.reset()">Resetar cliente</button>
+
+      </div>
+
+      <div class="col-8 content--map ">
+
+        <div id="mapid" class=""></div>
+
+        <div class="col">
+          <p>Total Cliente: {{ app.total_clientes }} - Peso Total: {{app.total_peso  | number:3}} kg - Total Médio {{ app.total_peso / app.total_clientes | number:2 }}</p>
+        </div>
+
+        <table class="col table table-striped table-bordered table-inverse  ">
+
+          <thead class="col ">
+            <tr>
+              <th>Nome</th>
+              <th>Endereço</th>
+              <th>Cidade</th>
+              <th>Pais</th>
+              <th>Peso</th>
+              <th>Lat</th>
+              <th>Lon</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+
+          <tbody  class="col ">
+            <tr ng-if="!app.deliveries.length">
+              <td colspan="8"> Nenhuma entrega cadastrada</td>
+            </tr>
+
+            <tr ng-repeat="delivery in app.deliveries" >
+              <td>{{delivery.name}}</td>
+              <td>{{delivery.address.street}}</td>
+              <td>{{delivery.address.city}}</td>
+              <td>{{delivery.address.country}}</td>
+              <td>{{delivery.weight  | number:3}} kg</td>
+              <td>{{delivery.address.latitude  }}</td>
+              <td>{{delivery.address.longitude  }}</td>
+              <td><span ng-click="app.delete(delivery)" class="badge badge-danger badge-pill hoverable">×</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4ctpdtN3U1kDAprCOdBcv_n2aRQ7dgTc&libraries=places" type="text/javascript"></script>
+  <script src="/node_modules/angular/angular.js"></script>
+  <script src="/node_modules/angular-resource/angular-resource.min.js"></script>
+  <script src="/node_modules/angular-dynamic-number/release/dynamic-number.min.js"></script>
+  <script src="/public/js/app.js"></script>
+  <script src="/public/js/directives/googleplace.directive.js"></script>
+  <script src="/public/js/controllers/app.controller.js"></script>
+  <script src="/public/js/controllers/form.controller.js"></script>
+  <script src="/public/js/services/api.service.js"></script>
+
+
+</body>
+</html>

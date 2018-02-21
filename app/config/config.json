@@ -1,0 +1,16 @@
+{
+
+    "development": {
+        "port": "3001"
+        ,"db_host": "mongodb://localhost:27017/fun-development"
+    }
+    ,"test": {
+        "port": "3001"
+        ,"db_host": "mongodb://localhost:27017/fun-teste"
+    }
+    ,"production": {
+        "port": "3001"
+        ,"db_host": "mongodb://heroku_6g5d29ml:Fun@digital1@ds243798.mlab.com:43798/heroku_6g5d29ml"
+    }
+
+}
