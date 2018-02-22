@@ -11,6 +11,7 @@
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
     "api:start": "./node_modules/mocha/bin/mocha --reporter spec --timeout 7000 && NODE_ENV=production nodemon api/app.js",
+    "start": "./node_modules/mocha/bin/mocha --reporter spec --timeout 7000 && NODE_ENV=production nodemon api/app.js",
     "api:dev": "NODE_ENV=development nodemon api/app.js"
   },
   "repository": {
