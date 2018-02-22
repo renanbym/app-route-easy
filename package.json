@@ -13,7 +13,7 @@
         "api:start": "./node_modules/mocha/bin/mocha --reporter spec --timeout 7000 && NODE_ENV=production nodemon api/app.js",
         "start": "./node_modules/mocha/bin/mocha --reporter spec --timeout 7000 && NODE_ENV=production nodemon api/app.js",
         "api:dev": "NODE_ENV=development nodemon api/app.js",
-        "heroku-prebuild": "npm --prefix ./api install ./api",
+        "heroku-prebuild": "npm --prefix ./api install ./api"
     },
     "repository": {
         "type": "git",
