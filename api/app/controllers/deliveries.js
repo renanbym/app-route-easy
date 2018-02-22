@@ -12,8 +12,8 @@ module.exports = (app) => {
         }
 
         ,save: (req, res) => {
-            console.log(req.query);
             console.log(req.params);
+            console.log(req.query);
             console.log(req.body);
             let query = new deliveryModel(req.body);
             query.save( (err, delivery) => {
@@ -24,7 +24,7 @@ module.exports = (app) => {
 
         ,delete: (req, res) => {
 
-            deliveryModel.remove({_id: req.body._id }, (err, delivery) => {
+            deliveryModel.remove({_id: req.params.id }, (err, delivery) => {
                 let msg_error = null;
                 if(err) res.status(401).json({"code":401,"status":"error","message": err.errors });
                 if( delivery.result.n === 0 ) msg_error = "Campos inválidos";

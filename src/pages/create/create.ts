@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
+import { NavController, NavParams, ActionSheetController,AlertController } from 'ionic-angular';
+import { Http } from '@angular/http';
+
+import { ListPage } from '../list/list';
 
 @Component({
   selector: 'page-create',
@@ -25,19 +26,11 @@ export class CreatePage {
   constructor(
     public navCtrl: NavController
     , public navParams: NavParams
-    , public http: HttpClient
+    , private _http: Http
     , public actionSheetCtrl: ActionSheetController
+    , private alertCtrl: AlertController
   ) {
 
-
-    var headers = new Headers({'Content-Type': 'application/json'});
-    var options = new RequestOptions({headers });
-
-    http
-    .post("http://localhost:3001/api/deliveries", {name: "oi"} )
-    .subscribe(data => {
-      console.log(data['_body']);
-    })
   }
 
   autoComplete(data:any) {
@@ -56,19 +49,25 @@ export class CreatePage {
         , longitude: this.form.longitude
       }
     }
+ 
 
-    var headers = new Headers();
-    headers.append("Accept", 'application/json');
-    headers.append('Content-Type', 'application/json' );
-    var options = new RequestOptions({headers });
+    this._http
+    .post(`${this.api}/api/deliveries`, data)
+    .subscribe(
+      res => {
+        this.navCtrl.push(ListPage);
+      },
+      err => {
 
-    this.http
-    .post("http://localhost:3001/api/deliveries", data, options )
-    .map(data => {
-      console.log(data['_body']);
-    }).catch(data => {
-      console.log(data['_body']);
-    })
+            let alert = this.alertCtrl.create({
+              title: 'Erro',
+              subTitle: 'Falha ao cadastrar',
+              buttons: ['Fechar']
+            });
+            alert.present();
+      }
+    );
+
   }
 
 }

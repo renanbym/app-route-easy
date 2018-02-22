@@ -1,56 +1,45 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
-import { Http, Response } from '@angular/http';
+import { Component,  OnInit } from '@angular/core'
+import { NavController, NavParams, ActionSheetController } from 'ionic-angular'
+import { Http, Response } from '@angular/http'
+
+import { CreatePage } from '../create/create'
+
 
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
 })
-export class ListPage {
-  items: Array<{title: string}>;
-  api: string = "http://localhost:3001";
+export class ListPage implements OnInit {
+  items: Array = []
+  api: string = "http://localhost:3001"
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private _http: Http,public actionSheetCtrl: ActionSheetController) {
 
+    this.refresh()
+
+  }
+
+  refresh(){
     this._http
     .get(`${this.api}/api/deliveries`)
     .map((res: Response) => res.json())
     .subscribe( (data) => {
-      this.items = data;
-    });
+      this.items = data.data
+    })
+  }
+
+  delete( item ){
+    this._http
+    .delete(`${this.api}/api/deliveries/${item._id}`)
+    .subscribe( () => {
+        this.refresh()
+    })
 
   }
 
-  presentActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Modify your album',
-      buttons: [
-        {
-          text: 'Destructive',
-          role: 'destructive',
-          handler: () => {
-            console.log('Destructive clicked');
-          }
-        },{
-          text: 'Archive',
-          handler: () => {
-            console.log('Archive clicked');
-          }
-        },{
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
+  goCreate(){
+    this.navCtrl.push(CreatePage)
   }
 
-  itemTapped(event, item) {
-    this.navCtrl.push(ListPage, {
-      item: item
-    });
-  }
+
 }

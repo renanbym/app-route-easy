@@ -5,6 +5,8 @@ module.exports = (app) => {
     app.route('/api/deliveries')
     .get( deliveries.get )
     .post( deliveries.save )
+
+    app.route('/api/deliveries/:id')
     .delete( deliveries.delete )
 
 }

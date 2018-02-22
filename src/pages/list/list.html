@@ -8,7 +8,7 @@
     <ion-title>Endereços</ion-title>
 
     <ion-buttons end>
-      <button ion-button icon-only color="royal">
+      <button ion-button icon-only color="royal" (click)="goCreate()">
         <ion-icon name="ios-add-circle"></ion-icon>
       </button>
     </ion-buttons>
@@ -17,15 +17,19 @@
 </ion-header>
 
 <ion-content>
+
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
+
+    <ion-item-sliding *ngFor="let item of items" (ionSwipe)="delete(item)" >
+      <ion-item>
+        {{item.name}}
+      </ion-item>
+
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="delete(item)">Apagar</button>
+      </ion-item-options>
+
+    </ion-item-sliding>
   </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+
 </ion-content>
