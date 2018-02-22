@@ -1,4 +1,4 @@
-const credentials = require('./config/config')[process.env.NODE_ENV]
+const credentials = require('./api/config/config')[process.env.NODE_ENV]
 const express = require('express')
 const cors = require('cors')
 const load = require('express-load')
@@ -30,7 +30,6 @@ load('models',{cwd: './api/app'})
 .then('controllers')
 .then('routes')
 .into( app )
-
 
 server.listen( credentials.port )
 .on('listening', () => {

@@ -10,10 +10,9 @@
         "lint": "ionic-app-scripts lint",
         "ionic:build": "ionic-app-scripts build",
         "ionic:serve": "ionic-app-scripts serve",
-        "api:start": "./node_modules/mocha/bin/mocha --reporter spec --timeout 7000 && NODE_ENV=production nodemon api/app.js",
-        "start": "./node_modules/mocha/bin/mocha --reporter spec --timeout 7000 && NODE_ENV=production nodemon api/app.js",
-        "api:dev": "NODE_ENV=development nodemon api/app.js",
-        "heroku-prebuild": "npm --prefix ./api install ./api"
+        "api:start": "./node_modules/mocha/bin/mocha --reporter spec --timeout 7000 && NODE_ENV=production nodemon app.js",
+        "start": "./node_modules/mocha/bin/mocha --reporter spec --timeout 7000 && NODE_ENV=production nodemon app.js",
+        "api:dev": "NODE_ENV=development nodemon app.js"
     },
     "repository": {
         "type": "git",
@@ -48,7 +47,17 @@
         "ng4-geoautocomplete": "^0.1.0",
         "rxjs": "5.5.2",
         "sw-toolbox": "3.6.0",
-        "zone.js": "0.8.18"
+        "zone.js": "0.8.18",
+        "body-parser": "^1.18.2",
+        "cors": "^2.8.4",
+        "ejs": "^2.5.7",
+        "express": "^4.15.4",
+        "express-load": "^1.1.16",
+        "http": "0.0.0",
+        "install": "^0.10.4",
+        "mongoose": "^4.11.12",
+        "mongoose-double": "0.0.1",
+        "npm": "^5.6.0"
     },
     "devDependencies": {
         "@ionic/app-scripts": "3.1.8",
