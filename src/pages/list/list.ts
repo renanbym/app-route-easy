@@ -10,15 +10,15 @@ import { CreatePage } from '../create/create'
   templateUrl: 'list.html'
 })
 export class ListPage implements OnInit {
-  items: Array = []
-  api: string = "http://localhost:3001"
+  items: any = []
+  api: string = "https://fun-renanbym.herokuapp.com"
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private _http: Http,public actionSheetCtrl: ActionSheetController) {
 
     this.refresh()
 
   }
-
+ 
   refresh(){
     this._http
     .get(`${this.api}/api/deliveries`)

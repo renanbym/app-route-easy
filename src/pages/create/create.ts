@@ -11,7 +11,7 @@ import { ListPage } from '../list/list';
 export class CreatePage {
 
   form: any = {}
-  api: string = "http://localhost:3001";
+  api: string = "https://fun-renanbym.herokuapp.com";
 
   public userSettings: any = {
     showSearchButton: false,
@@ -49,7 +49,7 @@ export class CreatePage {
         , longitude: this.form.longitude
       }
     }
- 
+
 
     this._http
     .post(`${this.api}/api/deliveries`, data)

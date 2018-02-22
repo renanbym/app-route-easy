@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map'
 })
 export class HomePage implements OnInit  {
 
-  api: string = "http://localhost:3001";
+  api: string = "https://fun-renanbym.herokuapp.com";
   markers: any = null
   map: any = null
 
