@@ -1,5 +1,4 @@
 module.exports = (app) => {
-
     const deliveryModel = app.models.delivery;
 
     const delivery = {
@@ -13,6 +12,9 @@ module.exports = (app) => {
         }
 
         ,save: (req, res) => {
+            console.log(req.query);
+            console.log(req.params);
+            console.log(req.body);
             let query = new deliveryModel(req.body);
             query.save( (err, delivery) => {
                 if(err) res.status(401).json({"code":401,"status":"error","message": err.errors })

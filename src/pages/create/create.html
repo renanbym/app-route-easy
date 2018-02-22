@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cadastro</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <form (ngSubmit)="addressForm()" >
+
+    <ion-item>
+      <ion-label stacked>Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="form.name" name="name">></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <div style="input-auto" style="margin: 20px 10px;">
+          <ng4geo-autocomplete (componentCallback)="autoComplete($event)" [userSettings]="userSettings"></ng4geo-autocomplete>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-input type="hidden" [(ngModel)]="form.address" name="address"></ion-input>
+    <ion-input type="hidden" [(ngModel)]="form.longitude" name="longitude" ></ion-input>
+    <ion-input type="hidden" [(ngModel)]="form.latitude" name="latitude" ></ion-input>
+
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button type="submit" block >Enviar</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+</ion-content>

@@ -17,28 +17,16 @@ db.on('error', function (err) {
 
 const app = express();
 const server = http.createServer(app);
-
-app.set('view engine', 'ejs');
-app.set('views', './web');
-
-app.use('/public', express.static('./web/public'));
-app.use('/node_modules', express.static('./node_modules'));
-app.use( (req, res, next) => { res.setHeader('Access-Control-Allow-Origin', '*');  next(); } );
-app.disable('x-powered-by');
-app.set('trust proxy', 1);
-
-
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({'extended':'false'}));
+app.use( (req, res, next) => { res.setHeader('Access-Control-Allow-Origin', '*');  next(); } );
 
-load('models',{cwd: 'app'})
+
+load('models',{cwd: './api/app'})
 .then('controllers')
 .then('routes')
 .into( app );
 
-app.get('/', (req, res) => {
-    res.render('index.ejs');
-})
 
 server.listen( credentials.port )
 .on('listening', () => {

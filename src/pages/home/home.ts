@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map'
@@ -11,7 +11,7 @@ export class HomePage implements OnInit  {
 
     api: string = "http://localhost:3001";
     markers: any = null
-    map: any = null;
+    map: any = null
 
     constructor(public navCtrl: NavController, private _http: Http) {
 
@@ -33,6 +33,14 @@ export class HomePage implements OnInit  {
         }).addTo(this.map);
 
         this.markers = L.layerGroup();
+
+
+        this._http
+        .post("http://localhost:3001/api/deliveries", JSON.stringify({name: "oi"}) )
+        .map((res: Response) => res.json())
+        .subscribe(data => {
+            console.log(data['_body']);
+        })
 
         this._http
         .get(`${this.api}/api/deliveries`)
